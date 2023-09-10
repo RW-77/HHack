@@ -19,19 +19,19 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('routes.home'))
+                return redirect(url_for('routes.home')) # should go to home page (routes.home)
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("login.html", user=current_user)
+    return render_template("login.html", user=current_user) # login --> home page
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('auth.login')) # logout should redir --> login page
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 @logout_required
@@ -61,6 +61,6 @@ def sign_up():
             login_user(new_user, remember=True)
             
             flash('Account created!', category='success')
-            return redirect(url_for('routes.home'))
+            return redirect(url_for('routes.upload')) # SHOULD SEND TO UPLOAD (upload.)
 
-    return render_template("sign_up.html", user=current_user)
+    return render_template("sign_up.html", user=current_user) # render sign up page

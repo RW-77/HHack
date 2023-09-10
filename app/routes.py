@@ -1,6 +1,9 @@
-from app import app
+from flask import Blueprint, render_template
+from flask_login import login_user, login_required, logout_user, current_user
 
-@app.route('/')
-@app.route('/index')
-def index():
-    return "Hello, World!"
+routes = Blueprint('routes', __name__)
+
+@routes.route('/')
+@login_required
+def home():
+    return render_template("home.html", user=current_user)

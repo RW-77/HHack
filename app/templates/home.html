@@ -2,7 +2,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
+<form method="POST" action="/" enctype="multipart/form-data">
+    <input type="file" name="pdf" accept="application/pdf"/>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}

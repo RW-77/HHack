@@ -1,4 +1,4 @@
-# HHack Instructions:
+# Test Instructions:
 1. Navigate to folder to contain project directory
 2. Clone the HHack repository:
 - HTTPS: `git clone https://github.com/RW-77/HHack.git`

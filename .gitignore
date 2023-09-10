@@ -1,3 +1,5 @@
 **/__pycache__
 hhvenv
 .flaskenv
+instance/
+instance/database.db

@@ -2,7 +2,16 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>
-    This is the home page.
-</h1>
+<link rel="stylesheet" href="home.css" />
+<div class="classes-flex" style="padding: 20px 20px">
+    {% for class_break in slots %}
+    <div style="background-color:rgb(119, 36, 21);">
+        <p style="padding: 20px 20px; color: white;">Finish {{ class_break['start_name'] }} at {{ class_break['start'] }} in {{ class_break['start_building'] }}</p>
+        <p style="padding: 20px 20px; color: white;">Finish {{ class_break['end_name'] }} at {{ class_break['end'] }} in {{ class_break['end_building'] }}</p>
+    </div>
+    {% endfor %}
+</div>
+<div class="images-grid" style="background-color:rgb(172, 117, 108); width: 70%;">
+
+</div>
 {% endblock %}

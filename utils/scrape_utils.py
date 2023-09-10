@@ -9,6 +9,7 @@ from operator import itemgetter
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 from selenium.webdriver.common.action_chains import ActionChains
@@ -94,7 +95,7 @@ def extractor(pdf_file):
     #     json.dump(finalList, fp)
 
     pdf_file.close()
-
+    print("test")
     for i in finalList:
         print(i)
     
@@ -112,12 +113,13 @@ def mapScreenshoter(origin,destination,image_file):
     options.headless = True
   
 # initializing webdriver for Chrome with our options
-    driver = webdriver.Chrome(options=options)
+    service = Service("/Users/caleb/Documents/Projects/HHack/chromedriver-mac-arm64/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
 
     #driver.maximize_window() # For maximizing window
     driver.get('https://aggiemap.tamu.edu/map/d')
 
-    driver.find_element(By.CSS_SELECTOR,'[alt="Toggle directions controls (routing and way-finding)"]').click()
+    driver.find_element(By.CLASS_NAME,'["loader flex flex-column justify-center align-center"]').click()
 
     searchBubble = driver.find_elements(By.CSS_SELECTOR,'[placeholder="Choose point or click on the map"]')
     searchBubble[1].click()
@@ -149,6 +151,8 @@ def mapScreenshoter(origin,destination,image_file):
     im = Image.open(image_file)
     im = im.crop((126, 0, 675, 600))
     im.save(image_file)
+
+    return image_file
 
     driver.quit()
     print("end...")
@@ -187,7 +191,9 @@ def generate(day_obj): # accepts
             earliest=i
             break
     print(earliest)
+    img_list=[]
     print("You will need to go to",buildings[earliest],rooms[earliest],"for",classes[earliest],"at",startClassesTimes[earliest],"first.")
     for i in range(earliest,len(startClassesTimes)):
         if(i!=len(startClassesTimes)-1 and buildings[i]!=buildings[i+1]):
-            mapScreenshoter(buildings[i],buildings[i+1],(f"map_{i+1}.png"))
+            img_list.append(mapScreenshoter(buildings[i],buildings[i+1],(f"map_{i+1}.png")))
+    return img_list

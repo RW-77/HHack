@@ -1,0 +1,16 @@
+div.classes-flex {
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+    border-color: blue;
+    top: 50px;
+    right: 20px;
+}
+
+p {
+    color: white;
+}
+
+* {
+    background-color: black;
+}
